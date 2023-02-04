@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Secure Lock</string>
+    <string name="welcome_to_secure_lock">Welcome to Secure Lock</string>
+    <string name="login_app">Login</string>
+    <string name="login_to_continue">Login to Continue</string>
+    <string name="email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="signUpName">Name</string>
+    <string name="sign_up_new_password">New Password</string>
+    <string name="sign_up_confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password_description">Enter registered email to reset password</string>
+    <string name="reset">Reset Password</string>
+</resources>
