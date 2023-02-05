@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:id="@+id/title_home"
-            android:text="Passwords"
+            android:text="Accounts"
             android:textSize="@dimen/_24ssp"
             android:textStyle="bold"
             android:textColor="@color/primary_text"
