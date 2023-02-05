@@ -22,14 +22,109 @@
             android:gravity="right"
             android:orientation="horizontal"
             >
+            <Button
+                android:id="@+id/newPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ New Account"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#03FFFFFF"
+                android:textSize="16dp"
+                android:textColor="@color/design_default_color_primary"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/logOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#03FFFFFF"
                 android:text="Log Out"
+                android:textSize="16dp"
+                android:textColor="@color/design_default_color_primary"
                 android:textStyle="bold" />
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/newPassForm"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:id="@+id/password"
+            android:text="Create New Account"
+            android:textAlignment="center"
+            android:textSize="@dimen/_24ssp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            />
+
+
+        <EditText
+            android:id="@+id/passName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:background="@drawable/input_backgroup_login"
+            android:hint="@string/signUpName"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:importantForAutofill="no"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/newPassCreate"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="20dp"
+                android:text="Create"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_8sdp"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/newPassCancel"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="20dp"
+                android:text="Cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_8sdp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,19 +137,19 @@
             android:textColor="@color/primary_text"
             />
         <FrameLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/_160sdp"
             android:layout_marginTop="@dimen/_16sdp"
+            android:id="@+id/passwordsView"
             >
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/passwordsRecyclerView"
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:overScrollMode="never"
-                android:padding="@dimen/_20sdp"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
@@ -63,6 +158,17 @@
                 android:layout_height="@dimen/_25sdp"
                 android:id="@+id/progressBar"
                 android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passwordNoData"
+                android:text="No Accounts Added"
+                android:visibility="gone"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/primary_text"
+                android:textAlignment="center"
+                />
 
 
         </FrameLayout>
