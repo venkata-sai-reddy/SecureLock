@@ -21,6 +21,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -48,15 +51,48 @@ public class SignUpActivity extends AppCompatActivity {
             if (isValidInformation()){
                 Log.d("SendMail", "before sign UP");
                 user.setName(signUpBinding.inputName.getText().toString().trim());
-                user.setEmailId(signUpBinding.inputEmailId.getText().toString().trim());
+                user.setEmailId(signUpBinding.inputEmailId.getText().toString().trim().toLowerCase());
                 if(signUp(user)){
-//                    loginDAO.storeSignUpDetails(getApplicationContext(), user);
                     user.setPassword(signUpBinding.inputNewPassword.getText().toString().trim());
                     saveSignUp(user);
                 }
                 onBackPressed();
             }
         });
+    }
+
+    private Set<String> getSignedUpUsers() {
+        FileInputStream fis = null;
+        Set<String> signUpMap = new HashSet<>();
+
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+            while ((text = br.readLine()) != null) {
+
+                String[] arr = text.toString().split(":");
+                signUpMap.add(arr[1].split("=")[1]);
+                sb.append(text).append("\n");
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return signUpMap;
     }
 
     private void saveSignUp(UserVO user) {
@@ -88,9 +124,9 @@ public class SignUpActivity extends AppCompatActivity {
         EmailService mail = new EmailService(Constants.SENDER_EMAIL, Constants.SENDER_EMAIL_PASS,
                 user.getEmailId(),
                 "Registration Successful!",
-                "Hi "+user.getName()+"\n\n" +
+                "Dear "+user.getName()+"\n\n" +
                         "Thanks for Registering into Secure Lock Application\n\n" +
-                        "Regards,\nSecure Lock Application");
+                        "Regards,\nSecure Lock");
         mail.execute();
         showToast("Registration Successful!!");
         return true;
@@ -105,15 +141,19 @@ public class SignUpActivity extends AppCompatActivity {
             showToast("Please enter name");
             return false;
         }
+        Set<String> existingUsers = getSignedUpUsers();
         if (signUpBinding.inputEmailId.getText().toString().trim().isEmpty()){
             showToast("Please enter email");
             return false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(signUpBinding.inputEmailId.getText().toString()).matches()){
             showToast("Please enter valid email!");
             return false;
+        } else if(existingUsers.contains(signUpBinding.inputEmailId.getText().toString().trim().toLowerCase())) {
+            showToast("Already Registered! Try to SignIn");
+            return false;
         }
-        if (signUpBinding.inputNewPassword.getText().toString().trim().isEmpty()){
-            showToast("Please enter password");
+        if (signUpBinding.inputNewPassword.getText().toString().trim().isEmpty() || signUpBinding.inputNewPassword.getText().toString().trim().length()<8){
+            showToast("Please enter valid password");
             return false;
         }else if (signUpBinding.inputConfirmPassword.getText().toString().trim().isEmpty()){
             showToast("Please enter confirm password");

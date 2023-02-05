@@ -13,4 +13,11 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="forgot_password_description">Enter registered email to reset password</string>
     <string name="reset">Reset Password</string>
+    <string name="new_password">+ New Password</string>
+    <string name="log_out">Log Out</string>
+    <string name="create_new_password">Create New Password</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="accounts">Accounts</string>
+    <string name="no_account_passwords">No Account Passwords</string>
 </resources>

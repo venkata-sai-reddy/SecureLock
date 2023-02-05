@@ -38,7 +38,9 @@ public class SignIn extends AppCompatActivity {
 
             Log.d("loginInfo","on click");
             if(isValidSignIn()){
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                intent.putExtra("id", signInBinding.inputEmailId.getText().toString().trim());
+                startActivity(intent);
             } else {
                 showToast("Please check SignIn information");
             }
@@ -75,8 +77,6 @@ public class SignIn extends AppCompatActivity {
 
                 String[] arr = text.toString().split(":");
                 signUpMap.put(arr[1].split("=")[1], arr[2].split("=")[1]);
-                Log.d("loginInfo","email Id : "+arr[1].split("=")[1]);
-                Log.d("loginInfo","Password : "+arr[2].split("=")[1]);
                 sb.append(text).append("\n");
             }
 
